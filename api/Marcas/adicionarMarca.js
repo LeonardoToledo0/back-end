@@ -4,7 +4,7 @@ const AdicionarMarca = async (nome) => {
   try {
     // Verificar se a marca já existe no banco de dados
     const marcaExistente = await pool.query(
-      "SELECT * FROM Marca WHERE nome = $1",
+      "SELECT * FROM Marcas WHERE nome = $1",
       [nome]
     );
     if (marcaExistente.rows.length > 0) {
@@ -13,7 +13,7 @@ const AdicionarMarca = async (nome) => {
 
     // Adicionar a marca ao banco de dados
     const novaMarca = await pool.query(
-      "INSERT INTO Marca (nome) VALUES ($1) RETURNING *",
+      "INSERT INTO Marcas (nome) VALUES ($1) RETURNING *",
       [nome]
     );
 

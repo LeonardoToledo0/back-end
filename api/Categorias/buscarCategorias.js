@@ -3,7 +3,7 @@ const pool = require("../../db/postgres");
 const buscarCategorias = async (req, res) => {
   try {
     // Consultar todas as categorias no banco de dados
-    const categorias = await pool.query("SELECT * FROM Categoria");
+    const categorias = await pool.query("SELECT * FROM Categorias");
 
     // Enviar as categorias como resposta
     res.json(categorias.rows);

@@ -1,20 +1,21 @@
 const pool = require("../../db/postgres");
 
-const AdicionarCategorias = async (nome) => {
+const AdicionarCategorias = async (req, res) => {
+  const { nome, ativo } = req.body;
   try {
-    // Verificar se a categoria já existe no banco de dados
     const categoriaExistente = await pool.query(
-      "SELECT * FROM Categoria WHERE nome = $1",
+      "SELECT * FROM Categorias WHERE nome = $1",
       [nome]
     );
+
     if (categoriaExistente.rows.length > 0) {
       throw new Error("A categoria já existe.");
     }
 
     // Adicionar a categoria ao banco de dados
     const novaCategoria = await pool.query(
-      "INSERT INTO Categoria (nome) VALUES ($1) RETURNING *",
-      [nome]
+      "INSERT INTO Categorias (nome, ativo) VALUES ($1, $2) RETURNING *",
+      [nome, ativo]
     );
 
     return novaCategoria.rows[0];
@@ -22,4 +23,5 @@ const AdicionarCategorias = async (nome) => {
     throw new Error(`Erro ao adicionar a categoria: ${error.message}`);
   }
 };
+
 module.exports = AdicionarCategorias;

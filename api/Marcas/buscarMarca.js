@@ -3,7 +3,7 @@ const pool = require("../../db/postgres");
 const buscarMarcas = async (req, res) => {
   try {
     // Consultar todas as marcas no banco de dados
-    const marcas = await pool.query("SELECT * FROM Marca");
+    const marcas = await pool.query("SELECT * FROM Marcas");
 
     // Enviar as marcas como resposta
     res.json(marcas.rows);

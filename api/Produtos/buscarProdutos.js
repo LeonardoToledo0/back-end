@@ -3,7 +3,7 @@ const pool = require("../../db/postgres");
 const BuscarProdutos = async (req, res) => {
   try {
     // Consultar todos os produtos no banco de dados
-    const query = "SELECT * FROM Produto";
+    const query = "SELECT * FROM Produtos";
     const produtos = await pool.query(query);
 
     // Enviar os produtos como resposta

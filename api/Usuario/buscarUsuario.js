@@ -2,7 +2,7 @@ const pool = require("../../db/postgres");
 
 const BuscarUsuario = async (req, res) => {
   try {
-    const usuarios = await pool.query("SELECT * FROM Usuario");
+    const usuarios = await pool.query("SELECT * FROM Usuarios");
 
     res.json(usuarios.rows);
   } catch (error) {

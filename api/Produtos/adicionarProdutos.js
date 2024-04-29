@@ -40,7 +40,7 @@ const AdicionarProdutos = async (req, res) => {
 
     // Inserir o produto no banco de dados
     const query = `
-        INSERT INTO Produto (
+        INSERT INTO Produtos (
           sku, 
           nome, 
           marca_id, 
