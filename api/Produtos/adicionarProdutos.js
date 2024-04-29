@@ -4,22 +4,24 @@ const pool = require("../../db/postgres");
 const AdicionarProdutos = async (req, res) => {
   try {
     const {
-      codigo,
+      sku,
       nome,
-      marca,
-      categoria,
-      avaliacao,
+      marca_id,
+      categoria_id,
       valor,
       valor_antigo,
-      modelo,
-      desconto_percentual,
-      destaque,
-      oferta,
-      estoque,
       imagem_principal,
       imagem_miniatura_1,
       imagem_miniatura_2,
       imagem_miniatura_3,
+      oferta,
+      destaque,
+      avaliacao,
+      desconto,
+      descricao,
+      estoque,
+      modelo,
+      ativo,
     } = req.body;
 
     // Enviar imagens para o Cloudinary
@@ -39,38 +41,42 @@ const AdicionarProdutos = async (req, res) => {
     // Inserir o produto no banco de dados
     const query = `
         INSERT INTO Produto (
-          codigo, 
+          sku, 
           nome, 
-          marca, 
-          categoria, 
-          avaliacao, 
+          marca_id, 
+          categoria_id, 
           valor, 
           valor_antigo, 
-          modelo, 
-          desconto_percentual, 
+          desconto,
           destaque, 
           oferta, 
+          avaliacao,
+          descricao,
           estoque,
+          modelo,
           imagem_principal,
           imagem_miniatura_1,
           imagem_miniatura_2,
-          imagem_miniatura_3
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
+          imagem_miniatura_3,
+          ativo
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
       `;
 
     const values = [
-      codigo,
+      sku,
       nome,
-      marca,
-      categoria,
-      avaliacao,
+      marca_id,
+      categoria_id,
       valor,
       valor_antigo,
-      modelo,
-      desconto_percentual,
+      desconto,
       destaque,
       oferta,
+      avaliacao,
+      descricao,
       estoque,
+      modelo,
+      ativo,
       imagemPrincipalResult.secure_url,
       imagemMiniatura1Result.secure_url,
       imagemMiniatura2Result.secure_url,
